@@ -42,17 +42,22 @@
   }
 }
 
-.chapter-tag {
+.page-heading .chapter-tag {
   display: inline-block;
   margin: 0 0 18px;
   padding: 8px 14px;
+
+  color: var(--ink);
 
   border: 2px solid var(--ink);
   border-left: 7px solid var(--red);
 
   background: var(--paper);
 
-  font-size: 0.52rem;
+  box-shadow: 4px 4px 0 var(--ink);
+
+  font-family: Orbitron, sans-serif;
+  font-size: 0.66rem;
   font-weight: 900;
   letter-spacing: 0.15em;
 
@@ -74,6 +79,7 @@
   display: block;
   color: var(--cyan);
   -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
 }
 
 .page-heading > p:last-child {
@@ -165,7 +171,7 @@
 
   color: var(--muted);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
@@ -193,7 +199,7 @@
 
   color: rgba(16, 19, 28, 0.3);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.15em;
 }
@@ -206,7 +212,7 @@
   gap: 24px;
 }
 
-.comic-panel {
+.hobby-comic .comic-panel {
   position: relative;
 
   min-height: 260px;
@@ -228,7 +234,7 @@
     box-shadow 0.25s ease;
 }
 
-.comic-panel::after {
+.hobby-comic .comic-panel::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -244,12 +250,12 @@
   pointer-events: none;
 }
 
-.comic-panel:hover {
+.hobby-comic .comic-panel:hover {
   transform: translateY(-8px) rotate(-1deg);
   box-shadow: 15px 15px 0 var(--cyan);
 }
 
-.comic-large {
+.hobby-comic .comic-large {
   grid-row: span 2;
   min-height: 545px;
   background:
@@ -260,7 +266,7 @@
     );
 }
 
-.comic-red {
+.hobby-comic .comic-red {
   background:
     linear-gradient(
       145deg,
@@ -269,7 +275,7 @@
     );
 }
 
-.comic-yellow {
+.hobby-comic .comic-yellow {
   background:
     linear-gradient(
       145deg,
@@ -278,7 +284,7 @@
     );
 }
 
-.comic-blue {
+.hobby-comic .comic-blue {
   background:
     linear-gradient(
       145deg,
@@ -287,7 +293,7 @@
     );
 }
 
-.comic-pink {
+.hobby-comic .comic-pink {
   background:
     linear-gradient(
       145deg,
@@ -296,7 +302,7 @@
     );
 }
 
-.comic-white {
+.hobby-comic .comic-white {
   background:
     linear-gradient(
       145deg,
@@ -316,19 +322,19 @@
   font-size: 3rem;
 }
 
-.comic-panel div {
+.hobby-comic .comic-panel div {
   position: relative;
   z-index: 2;
 }
 
-.comic-panel small {
-  color: var(--red);
-  font-size: 0.48rem;
+.hobby-comic .comic-panel small {
+  color: var(--red-text);
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
 
-.comic-panel h2 {
+.hobby-comic .comic-panel h2 {
   margin: 10px 0;
 
   font-family: "Bebas Neue", sans-serif;
@@ -336,7 +342,7 @@
   line-height: 0.85;
 }
 
-.comic-panel p {
+.hobby-comic .comic-panel p {
   max-width: 510px;
   margin: 0;
 
@@ -356,7 +362,7 @@
 
 .road-step {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 100px minmax(0, 1fr);
   gap: 28px;
   align-items: center;
 }
@@ -395,14 +401,15 @@
 }
 
 .step-content span {
-  color: var(--red);
-  font-size: 0.48rem;
+  color: var(--red-text);
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
 
 .step-content h2 {
   margin: 8px 0;
+  overflow-wrap: anywhere;
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 2.7rem;
@@ -464,8 +471,8 @@
 }
 
 .blueprint-note span {
-  color: var(--red);
-  font-size: 0.48rem;
+  color: var(--red-text);
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
@@ -528,8 +535,8 @@
 }
 
 .construction-number {
-  color: var(--red);
-  font-size: 0.5rem;
+  color: var(--red-text);
+  font-size: 0.64rem;
   font-weight: 900;
   letter-spacing: 0.2em;
 }
@@ -546,6 +553,7 @@
   display: block;
   color: var(--cyan);
   -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
 }
 
 .construction-box p {
@@ -590,8 +598,8 @@
 }
 
 .construction-box small {
-  color: var(--red);
-  font-size: 0.48rem;
+  color: var(--red-text);
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.15em;
 }
@@ -616,7 +624,7 @@
 
   color: var(--ink);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   text-align: center;
   letter-spacing: 0.1em;
@@ -680,7 +688,7 @@
 
   color: var(--muted);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
@@ -695,9 +703,9 @@
 }
 
 .contact-action {
-  color: var(--red);
+  color: var(--red-text);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.13em;
 }
@@ -716,9 +724,9 @@
 }
 
 .contact-note span {
-  color: var(--red);
+  color: var(--red-text);
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.18em;
 }
@@ -739,7 +747,7 @@
 
   color: var(--ink);
 
-  font-size: 0.58rem;
+  font-size: 0.7rem;
   font-weight: 900;
   letter-spacing: 0.15em;
 
@@ -770,7 +778,7 @@
     grid-template-columns: 1fr;
   }
 
-  .comic-large {
+  .hobby-comic .comic-large {
     grid-row: auto;
     min-height: 360px;
   }
@@ -803,7 +811,7 @@
   }
 
   .road-step {
-    grid-template-columns: 62px 1fr;
+    grid-template-columns: 62px minmax(0, 1fr);
     gap: 15px;
   }
 
@@ -830,18 +838,44 @@
   }
 }
 
-@media (pointer: coarse) {
-  .cursor-glow {
-    display: none;
+/* ---------- Added: layout + contact polish ---------- */
+
+/* six hobby panels: the last one spans the row so the grid has no gap */
+.hobby-comic .comic-panel:last-child {
+  grid-column: 1 / -1;
+  min-height: 220px;
+}
+
+@media (max-width: 800px) {
+  .hobby-comic .comic-panel:last-child {
+    grid-column: auto;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+.contact-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+button.comic-button {
+  cursor: pointer;
+  font-family: Orbitron, sans-serif;
+}
+
+.copy-status {
+  color: var(--red-text);
+
+  font-family: Orbitron, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.contact-card:focus-visible,
+.skill-card:focus-visible {
+  outline-offset: 6px;
 }
