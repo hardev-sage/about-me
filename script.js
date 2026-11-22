@@ -1,44 +1,56 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  const navigationLinks = document.querySelectorAll(".navigation-links a");
+  const cursorGlow = document.querySelector(".cursor-glow");
 
-  navigationLinks.forEach((link) => {
-    const linkPage = link.getAttribute("href");
+  if (cursorGlow) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
 
-    if (linkPage === currentPage) {
-      link.classList.add("active");
-    }
+    let currentX = mouseX;
+    let currentY = mouseY;
 
-    link.addEventListener("click", () => {
-      document.body.classList.add("page-transition");
+    document.addEventListener("pointermove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      document.body.classList.add("cursor-active");
     });
-  });
 
-  const buttons = document.querySelectorAll(".manga-button, .quick-panel");
+    const animateCursor = () => {
+      currentX += (mouseX - currentX) * 0.12;
+      currentY += (mouseY - currentY) * 0.12;
 
-  buttons.forEach((button) => {
-    button.addEventListener("pointermove", (event) => {
-      const rect = button.getBoundingClientRect();
+      cursorGlow.style.left = `${currentX}px`;
+      cursorGlow.style.top = `${currentY}px`;
 
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      requestAnimationFrame(animateCursor);
+    };
 
-      button.style.setProperty("--mouse-x", `${x}px`);
-      button.style.setProperty("--mouse-y", `${y}px`);
-    });
-  });
+    animateCursor();
+  }
 
-  document.querySelectorAll("a[href]").forEach((link) => {
-    link.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        link.classList.add("keyboard-hit");
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
 
-        setTimeout(() => {
-          link.classList.remove("keyboard-hit");
-        }, 250);
+  document
+    .querySelectorAll(".navigation-links a")
+    .forEach((link) => {
+      const target = link.getAttribute("href");
+
+      if (target === currentPage) {
+        link.classList.add("active");
       }
     });
-  });
+
+  document
+    .querySelectorAll("a[href]")
+    .forEach((link) => {
+      link.addEventListener("pointerdown", () => {
+        link.style.transform = "translateY(2px) scale(0.97)";
+
+        setTimeout(() => {
+          link.style.transform = "";
+        }, 150);
+      });
+    });
 });
