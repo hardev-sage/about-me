@@ -1,15 +1,11 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const portfolioLink = document.querySelector(
-    '.navigation-links a[href="#portfolio"]'
-  );
+  const navigationLinks = document.querySelectorAll(".navigation-links a");
 
-  if (!portfolioLink) {
-    return;
-  }
-
-  portfolioLink.addEventListener("click", () => {
-    console.log("Portfolio section opened.");
+  navigationLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      document.body.dataset.activeSection = link.getAttribute("href");
+    });
   });
 });
