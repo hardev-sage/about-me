@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@500;700;900&display=swap");
-
 :root {
   --ink: #11131b;
   --paper: #f7f2e8;
@@ -17,6 +15,7 @@
 
   --white: #ffffff;
   --muted: #626876;
+  --red-text: #b3112f;
 
   --border: 4px solid var(--ink);
 
@@ -96,8 +95,8 @@ body::before {
 
   z-index: 9999;
 
-  left: 50%;
-  top: 50%;
+  left: 0;
+  top: 0;
 
   transform: translate(-50%, -50%);
 
@@ -343,7 +342,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
 
   font-weight: 700;
 
@@ -457,9 +456,11 @@ body.cursor-hover .cursor-glow {
 .chapter-tag {
   display: inline-flex;
 
+  flex-wrap: wrap;
+
   align-items: center;
 
-  gap: 18px;
+  gap: 6px 18px;
 
   margin-bottom: 18px;
 
@@ -471,7 +472,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.58rem;
+  font-size: 0.7rem;
 
   letter-spacing: 0.12em;
 
@@ -594,18 +595,6 @@ body.cursor-hover .cursor-glow {
   font-weight: 700;
 }
 
-.single-line {
-  margin-top: 8px;
-
-  color: var(--red);
-
-  font-size: 0.82rem;
-
-  font-style: italic;
-
-  font-weight: 700;
-}
-
 .hero-description {
   max-width: 600px;
 
@@ -663,12 +652,16 @@ body.cursor-hover .cursor-glow {
     9px 9px 0 var(--ink);
 }
 
-.cyan {
+.comic-button.cyan {
   background: var(--cyan);
 }
 
-.red {
+.comic-button.red {
   background: var(--red);
+}
+
+.comic-button.yellow {
+  background: var(--yellow);
 }
 
 .hero-illustration {
@@ -751,7 +744,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.55rem;
+  font-size: 0.68rem;
 
   font-weight: 900;
 
@@ -846,7 +839,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.47rem;
+  font-size: 0.62rem;
 
   letter-spacing: 0.13em;
 }
@@ -864,13 +857,16 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
 
   font-weight: 900;
 }
 
 .stat-row i {
+  width: var(--fill, 100%);
   height: 5px;
+  transform-origin: left;
+  animation: fillBar 1s cubic-bezier(.2, 1, .3, 1) 0.9s both;
 
   background:
     linear-gradient(
@@ -882,6 +878,12 @@ body.cursor-hover .cursor-glow {
   border: 1px solid var(--ink);
 }
 
+@keyframes fillBar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
 .stat-row b {
   text-align: right;
 }
@@ -890,7 +892,7 @@ body.cursor-hover .cursor-glow {
   position: absolute;
 
   left: 0;
-  bottom: 40px;
+  bottom: -4px;
 
   padding: 12px 16px;
 
@@ -902,7 +904,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.57rem;
+  font-size: 0.7rem;
 
   font-weight: 900;
 
@@ -953,7 +955,7 @@ body.cursor-hover .cursor-glow {
   gap: 22px;
 }
 
-.comic-panel {
+.comic-grid .comic-panel {
   position: relative;
 
   min-height: 330px;
@@ -975,7 +977,7 @@ body.cursor-hover .cursor-glow {
     box-shadow 0.2s ease;
 }
 
-.comic-panel:hover {
+.comic-grid .comic-panel:hover {
   transform:
     translate(-5px, -7px)
     rotate(-1deg);
@@ -1037,14 +1039,14 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.52rem;
+  font-size: 0.66rem;
 
   font-weight: 900;
 
   letter-spacing: 0.12em;
 }
 
-.comic-panel h2 {
+.comic-grid .comic-panel h2 {
   margin-top: 18px;
 
   font-family: "Bebas Neue", sans-serif;
@@ -1061,7 +1063,7 @@ body.cursor-hover .cursor-glow {
     4px 4px 0 rgba(255,255,255,0.55);
 }
 
-.comic-panel p {
+.comic-grid .comic-panel p {
   max-width: 460px;
 
   margin-top: 18px;
@@ -1158,7 +1160,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.5rem;
+  font-size: 0.64rem;
 
   letter-spacing: 0.15em;
 
@@ -1203,7 +1205,7 @@ body.cursor-hover .cursor-glow {
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
 
   font-weight: 900;
 
@@ -1229,15 +1231,17 @@ body.cursor-hover .cursor-glow {
 
   display: flex;
 
+  flex-wrap: wrap;
+
   justify-content: space-between;
 
-  gap: 20px;
+  gap: 12px 20px;
 
   border-top: 3px solid var(--ink);
 
   font-family: Orbitron, sans-serif;
 
-  font-size: 0.48rem;
+  font-size: 0.62rem;
 
   font-weight: 900;
 
@@ -1256,7 +1260,7 @@ body.cursor-hover .cursor-glow {
   }
 
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
 
     padding-top: 60px;
   }
@@ -1284,7 +1288,7 @@ body.cursor-hover .cursor-glow {
   .nav-links a {
     padding: 7px 6px;
 
-    font-size: 0.52rem;
+    font-size: 0.66rem;
   }
 
   .hero {
@@ -1318,19 +1322,23 @@ body.cursor-hover .cursor-glow {
   }
 
   .vertical-jp {
-    right: -5px;
+    right: 4px;
+  }
+
+  .hero {
+    overflow-x: clip;
   }
 
   .comic-grid {
     width: 92%;
   }
 
-  .comic-panel,
+  .comic-grid .comic-panel,
   .quote-panel {
     min-height: 300px;
   }
 
-  .comic-panel h2 {
+  .comic-grid .comic-panel h2 {
     font-size: 4rem;
   }
 
@@ -1385,38 +1393,291 @@ body.cursor-hover .cursor-glow {
 
 }
 
+/* ---------- Accessibility ---------- */
+
+:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10001;
+
+  padding: 10px 14px;
+
+  background: var(--yellow);
+  color: var(--ink);
+
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+
+  font-family: Orbitron, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.intro-screen.is-hidden {
+  display: none;
+}
+
+/* ---------- Press feedback (replaces the old JS inline transforms) ---------- */
+
+.comic-button:active,
+.comic-grid .comic-panel:active,
+.nav-links a:active {
+  transform: translate(2px, 3px) scale(0.97);
+}
+
+/* ---------- Mobile navigation ---------- */
+
+.nav-toggle {
+  display: none;
+
+  align-items: center;
+  gap: 10px;
+
+  padding: 9px 12px;
+
+  color: var(--ink);
+  background: var(--yellow);
+
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+
+  font-family: Orbitron, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+}
+
+.nav-toggle-bars,
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  display: block;
+
+  width: 16px;
+  height: 3px;
+
+  background: var(--ink);
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-bars {
+  position: relative;
+}
+
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-bars::before {
+  top: -6px;
+}
+
+.nav-toggle-bars::after {
+  top: 6px;
+}
+
+.nav-open .nav-toggle-bars {
+  background: transparent;
+}
+
+.nav-open .nav-toggle-bars::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-open .nav-toggle-bars::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+
+  .main-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .js .nav-toggle {
+    display: inline-flex;
+  }
+
+  .js .nav-links {
+    display: none;
+
+    flex-basis: 100%;
+    flex-direction: column;
+
+    gap: 0;
+
+    padding-top: 10px;
+  }
+
+  .js .nav-open .nav-links {
+    display: flex;
+  }
+
+  .js .nav-links a {
+    padding: 13px 8px;
+
+    font-size: 0.78rem;
+
+    border-top: 2px dashed rgba(17, 19, 27, 0.3);
+  }
+
+  .js .nav-links a::after {
+    left: 8px;
+    right: auto;
+    width: 36px;
+    bottom: 8px;
+  }
+
+}
+
+/* ---------- Scroll reveal ----------
+   Uses the individual `translate` property, so it never fights the
+   rotations and hover transforms the panels already have. */
+
 .reveal-ready {
   opacity: 0;
-  transform: translateY(35px) rotate(1deg);
+  translate: 0 32px;
+
   transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(.2, 1.3, .4, 1);
+    opacity 0.6s ease,
+    translate 0.6s cubic-bezier(.2, 1.2, .4, 1),
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .reveal-ready.revealed {
   opacity: 1;
-  transform: translateY(0) rotate(0);
+  translate: 0 0;
 }
 
-/* Tiny hidden easter egg */
-.manga-mode .comic-panel {
+/* ---------- Toast + easter egg ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 10002;
+
+  padding: 12px 18px;
+
+  color: var(--ink);
+  background: var(--yellow);
+
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+
+  font-family: Orbitron, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+
+  opacity: 0;
+  translate: -50% 20px;
+
+  pointer-events: none;
+
+  transition: opacity 0.25s ease, translate 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+.manga-mode .comic-panel,
+.manga-mode .skill-card,
+.manga-mode .contact-card,
+.manga-mode .step-content {
   animation: mangaShake 0.35s ease 3;
 }
 
 @keyframes mangaShake {
   0%, 100% {
-    transform: translate(0, 0) rotate(0);
+    translate: 0 0;
   }
 
   25% {
-    transform: translate(-5px, 2px) rotate(-1deg);
+    translate: -5px 2px;
   }
 
   50% {
-    transform: translate(5px, -2px) rotate(1deg);
+    translate: 5px -2px;
   }
 
   75% {
-    transform: translate(-3px, -1px) rotate(-1deg);
+    translate: -3px -1px;
   }
+}
+
+/* ---------- Reduced motion (stronger than the global rule above) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .intro-screen,
+  .cursor-glow,
+  .speed-lines {
+    display: none;
+  }
+
+  .stat-row i,
+  .sun,
+  .manga-mode .comic-panel,
+  .manga-mode .skill-card,
+  .manga-mode .contact-card,
+  .manga-mode .step-content {
+    animation: none;
+  }
+
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+
+  .cursor-glow,
+  .speed-lines,
+  .page-dots,
+  .intro-screen,
+  .nav-toggle,
+  .skip-link,
+  .toast {
+    display: none !important;
+  }
+
+  .reveal-ready {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .site-header {
+    position: static;
+    backdrop-filter: none;
+  }
+
 }
