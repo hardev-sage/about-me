@@ -10,11 +10,22 @@
   >
 
   <title>Saarth Gupta | Personal Blueprint</title>
+  <meta name="theme-color" content="#11131b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Saarth Gupta | Personal Blueprint">
+  <meta property="og:description" content="Saarth Gupta - personal website, skills, hobbies and Japan 2028 roadmap.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2311131b'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='%23ef3155'%3E%E3%82%B5%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@500;700;900&display=swap">
+  <script>document.documentElement.classList.add("js");</script>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <a class="skip-link" href="#main">SKIP TO CONTENT</a>
 
   <!-- Cursor-following light -->
   <div class="cursor-glow" aria-hidden="true"></div>
@@ -24,10 +35,10 @@
   <div class="speed-lines" aria-hidden="true"></div>
 
   <!-- Intro -->
-  <div class="intro-screen" aria-hidden="true">
+  <div class="intro-screen" aria-hidden="true" title="Click to skip">
     <div class="intro-card">
       <span class="intro-small">PERSONAL BLUEPRINT / 2028</span>
-      <strong>サース</strong>
+      <strong lang="ja">サース</strong>
       <span class="intro-bottom">LOADING CHARACTER...</span>
     </div>
   </div>
@@ -36,15 +47,20 @@
     <nav class="main-nav" aria-label="Main navigation">
 
       <a class="logo" href="index.html">
-        <span>サース</span>
+        <span lang="ja">サース</span>
         <small>SAARTH GUPTA</small>
       </a>
 
-      <div class="nav-links">
-        <a class="active" href="index.html">HOME</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        MENU
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" class="active" aria-current="page">HOME</a>
         <a href="skills.html">SKILLS</a>
         <a href="hobbies.html">HOBBIES</a>
-        <a href="next-arc.html">ROADMAP</a>
+        <a href="next-arc.html">NEXT ARC</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="contact.html">CONTACT</a>
       </div>
@@ -52,7 +68,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- HERO -->
     <section class="hero">
@@ -64,7 +80,7 @@
           <span>PERSONAL FILE</span>
         </div>
 
-        <p class="jp-title">東京 2028</p>
+        <p class="jp-title" lang="ja">東京 2028</p>
 
         <h1>
           SAARTH
@@ -79,11 +95,7 @@
         </div>
 
         <p class="tagline">
-          Maybe I am RNA. Currently sharing prison in Mar Thoma Higher Secondary School as an 11th grader.
-        </p>
-
-        <p class="single-line">
-          (Currently single - if interested, don't hesitate.)
+          Maybe I am RNA. Currently serving time as an 11th grader.
         </p>
 
         <p class="hero-description">
@@ -99,7 +111,7 @@
       </div>
 
       <!-- Illustrated side -->
-      <div class="hero-illustration">
+      <div class="hero-illustration" aria-hidden="true">
 
         <div class="sun"></div>
 
@@ -126,19 +138,19 @@
 
           <div class="stat-row">
             <span>BUILD</span>
-            <i></i>
+            <i style="--fill: 100%"></i>
             <b>∞</b>
           </div>
 
           <div class="stat-row">
             <span>CURIOUS</span>
-            <i></i>
+            <i style="--fill: 100%"></i>
             <b>MAX</b>
           </div>
 
           <div class="stat-row">
             <span>CHAOS</span>
-            <i></i>
+            <i style="--fill: 82%"></i>
             <b>HIGH</b>
           </div>
 
@@ -150,7 +162,7 @@
           JAPAN
         </div>
 
-        <div class="vertical-jp">
+        <div class="vertical-jp" lang="ja">
           少年の設計図
         </div>
 
@@ -254,9 +266,9 @@
   </main>
 
   <footer class="site-footer">
-    <span>サース / PERSONAL BLUEPRINT</span>
+    <span><span lang="ja">サース</span> / PERSONAL BLUEPRINT</span>
     <span>HTML + CSS + JS</span>
-    <span>© 2026 SAARTH GUPTA</span>
+    <span>© <span data-year>2026</span> SAARTH GUPTA</span>
   </footer>
 
   <script src="script.js"></script>
