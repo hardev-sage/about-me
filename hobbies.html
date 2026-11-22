@@ -5,31 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Saarth Gupta's hobbies and interests.">
   <title>Hobbies | Saarth Gupta</title>
+  <meta name="theme-color" content="#11131b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hobbies | Saarth Gupta">
+  <meta property="og:description" content="Saarth Gupta's hobbies and interests.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2311131b'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='%23ef3155'%3E%E3%82%B5%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@500;700;900&display=swap">
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="inner-pages.css">
 </head>
 
 <body class="inner-page hobbies-page">
 
+  <a class="skip-link" href="#main">SKIP TO CONTENT</a>
+
   <header class="site-header">
-    <nav class="main-navigation" aria-label="Main navigation">
-      <a class="site-logo" href="index.html">
-        <span>サース</span>
-        <small>/ SAARTH</small>
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <a class="logo" href="index.html">
+        <span lang="ja">サース</span>
+        <small>SAARTH GUPTA</small>
       </a>
 
-      <div class="navigation-links">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        MENU
+      </button>
+
+      <div class="nav-links" id="nav-links">
         <a href="index.html">HOME</a>
         <a href="skills.html">SKILLS</a>
-        <a class="active" href="hobbies.html">HOBBIES</a>
+        <a href="hobbies.html" class="active" aria-current="page">HOBBIES</a>
         <a href="next-arc.html">NEXT ARC</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="contact.html">CONTACT</a>
       </div>
+
     </nav>
   </header>
 
-  <main class="inner-container">
+  <main id="main" class="inner-container">
 
     <section class="page-heading">
       <p class="chapter-tag">CHAPTER 02 / STORYCRAFT</p>
@@ -136,7 +154,7 @@
   </main>
 
   <footer class="site-footer">
-    <span>サース / TOKYO 2028</span>
+    <span><span lang="ja">サース</span> / TOKYO 2028</span>
     <span>CHAPTER 02 COMPLETE</span>
   </footer>
 
