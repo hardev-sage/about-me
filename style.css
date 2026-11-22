@@ -1,0 +1,108 @@
+:root {
+  --midnight: #070b18;
+  --cyan: #00f0ff;
+  --crimson: #ff2a5f;
+  --white: #f4f7fb;
+  --muted: #aeb8ca;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--white);
+  background: var(--midnight);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.site-header {
+  padding: 24px 6vw;
+}
+
+.main-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  color: var(--cyan);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.navigation-links {
+  display: flex;
+  gap: 24px;
+}
+
+.navigation-links a {
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navigation-links a:hover {
+  color: var(--cyan);
+}
+
+.site-container {
+  width: min(1100px, 88%);
+  margin: 0 auto;
+}
+
+.hero-section {
+  padding: 100px 0 80px;
+}
+
+.japanese-accent {
+  color: var(--crimson);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.mission-badge {
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.hero-section h1 {
+  margin: 20px 0 10px;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.9;
+}
+
+.age-label {
+  color: var(--crimson);
+  font-weight: 800;
+}
+
+.hero-tagline {
+  max-width: 760px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.hero-goal {
+  max-width: 650px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+section:not(.hero-section) {
+  padding: 50px 0;
+}
+
+section:not(.hero-section) h2 {
+  color: var(--cyan);
+}
