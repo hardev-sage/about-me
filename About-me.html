@@ -3,38 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Saarth Gupta | Tokyo 2028 Mecha-Manga Blueprint">
-  <title>Saarth Gupta | Tokyo 2028</title>
+
+  <meta
+    name="description"
+    content="Saarth Gupta - personal website, skills, hobbies and Japan 2028 roadmap."
+  >
+
+  <title>Saarth Gupta | Personal Blueprint</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- Cursor-following light -->
   <div class="cursor-glow" aria-hidden="true"></div>
 
-  <div class="manga-speed-lines" aria-hidden="true"></div>
+  <!-- Manga atmosphere -->
+  <div class="page-dots" aria-hidden="true"></div>
+  <div class="speed-lines" aria-hidden="true"></div>
 
+  <!-- Intro -->
   <div class="intro-screen" aria-hidden="true">
-    <div class="intro-panel">
-      <span>BLUEPRINT 01</span>
+    <div class="intro-card">
+      <span class="intro-small">PERSONAL BLUEPRINT / 2028</span>
       <strong>サース</strong>
-      <small>東京 2028</small>
+      <span class="intro-bottom">LOADING CHARACTER...</span>
     </div>
   </div>
 
   <header class="site-header">
-    <nav class="main-navigation" aria-label="Main navigation">
+    <nav class="main-nav" aria-label="Main navigation">
 
-      <a class="site-logo" href="index.html">
+      <a class="logo" href="index.html">
         <span>サース</span>
         <small>SAARTH GUPTA</small>
       </a>
 
-      <div class="navigation-links">
+      <div class="nav-links">
         <a class="active" href="index.html">HOME</a>
         <a href="skills.html">SKILLS</a>
         <a href="hobbies.html">HOBBIES</a>
-        <a href="next-arc.html">NEXT ARC</a>
+        <a href="next-arc.html">ROADMAP</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="contact.html">CONTACT</a>
       </div>
@@ -44,78 +54,103 @@
 
   <main>
 
-    <section class="hero-section">
-
-      <div class="hero-background-kanji" aria-hidden="true">
-        未来
-      </div>
+    <!-- HERO -->
+    <section class="hero">
 
       <div class="hero-copy">
 
-        <div class="chapter-strip">
-          <span>CHAPTER 00</span>
-          <span>PERSONAL BLUEPRINT</span>
+        <div class="chapter-tag">
+          <span>NO. 001</span>
+          <span>PERSONAL FILE</span>
         </div>
 
-        <p class="japanese-title">東京 2028</p>
+        <p class="jp-title">東京 2028</p>
 
         <h1>
           SAARTH
           <span>GUPTA</span>
         </h1>
 
-        <div class="identity-line">
-          <span>16</span>
+        <div class="identity">
+          <span class="identity-box">16</span>
+          <span>YEARS OLD</span>
           <b>×</b>
           <span>11TH GRADE</span>
         </div>
 
-        <p class="hero-tagline">
-          Maybe I am RNA. Currently sharing prison in Mar Thoma Higher Secondary
-          School as an 11th grader.
-          <span>
-            (Currently single - if interested, don't hesitate.)
-          </span>
+        <p class="tagline">
+          Maybe I am RNA. Currently sharing prison in Mar Thoma Higher Secondary School as an 11th grader.
+        </p>
+
+        <p class="single-line">
+          (Currently single - if interested, don't hesitate.)
         </p>
 
         <p class="hero-description">
-          Game development, physics, mechatronics, storytelling and a plan
-          pointing toward Japan in 2028.
+          Game development, 3D design, physics, simulation, debugging,
+          storytelling and a very specific destination: Japan in 2028.
         </p>
 
-        <div class="hero-buttons">
-          <a href="skills.html" class="manga-button cyan-button">
-            SEE MY SKILLS
-          </a>
-
-          <a href="next-arc.html" class="manga-button red-button">
-            JAPAN 2028
-          </a>
+        <div class="hero-actions">
+          <a href="skills.html" class="comic-button cyan">EXPLORE SKILLS</a>
+          <a href="next-arc.html" class="comic-button red">JAPAN 2028 →</a>
         </div>
 
       </div>
 
-      <div class="hero-art" aria-hidden="true">
+      <!-- Illustrated side -->
+      <div class="hero-illustration">
 
-        <div class="art-sun"></div>
+        <div class="sun"></div>
 
-        <div class="art-circle circle-one"></div>
-        <div class="art-circle circle-two"></div>
+        <div class="burst burst-one"></div>
+        <div class="burst burst-two"></div>
 
-        <div class="mecha-symbol">
-          <div class="symbol-core">SG</div>
-          <span class="symbol-line line-one"></span>
-          <span class="symbol-line line-two"></span>
-          <span class="symbol-line line-three"></span>
+        <div class="character-card">
+
+          <div class="card-top">
+            <span>SG-16</span>
+            <span>IND / JPN</span>
+          </div>
+
+          <div class="mecha-face">
+            <div class="face-eye eye-left"></div>
+            <div class="face-eye eye-right"></div>
+            <div class="face-mouth"></div>
+          </div>
+
+          <div class="character-name">
+            <strong>SAARTH</strong>
+            <span>THE ENGINEERING MANGA GUY</span>
+          </div>
+
+          <div class="stat-row">
+            <span>BUILD</span>
+            <i></i>
+            <b>∞</b>
+          </div>
+
+          <div class="stat-row">
+            <span>CURIOUS</span>
+            <i></i>
+            <b>MAX</b>
+          </div>
+
+          <div class="stat-row">
+            <span>CHAOS</span>
+            <i></i>
+            <b>HIGH</b>
+          </div>
+
         </div>
 
-        <div class="art-caption">
-          <span>INDIA</span>
-          <b>→</b>
-          <span>JAPAN</span>
+        <div class="location-stamp">
+          INDIA
+          <strong>→</strong>
+          JAPAN
         </div>
 
-        <div class="vertical-japanese">
+        <div class="vertical-jp">
           少年の設計図
         </div>
 
@@ -123,47 +158,108 @@
 
     </section>
 
-    <section class="home-panels">
+    <!-- FUN PANEL GRID -->
+    <section class="comic-grid">
 
-      <a href="skills.html" class="story-panel panel-cyan">
+      <a href="skills.html" class="comic-panel cyan-panel">
+
         <span class="panel-number">01</span>
-        <span class="panel-label">CHAPTER</span>
-        <h2>HARDWARE</h2>
+        <span class="panel-label">ABILITY FILE</span>
+
+        <h2>SKILLS</h2>
+
         <p>
-          Game dev, CAD, simulation, debugging and LARPing.
+          Games, CAD, simulation, debugging and other things
+          that make a perfectly normal evening disappear.
         </p>
-        <strong>READ →</strong>
+
+        <span class="panel-arrow">READ FILE →</span>
+
+        <div class="panel-doodle">⚙</div>
+
       </a>
 
-      <a href="hobbies.html" class="story-panel panel-red">
+      <a href="hobbies.html" class="comic-panel red-panel">
+
         <span class="panel-number">02</span>
-        <span class="panel-label">CHAPTER</span>
-        <h2>STORYCRAFT</h2>
+        <span class="panel-label">OFF-DUTY MODE</span>
+
+        <h2>HOBBIES</h2>
+
         <p>
-          Manga, anime, web novels, Soulslikes and exploration.
+          Manga, anime, web novels, Soulslikes, LARPing
+          and wandering around looking for something interesting.
         </p>
-        <strong>READ →</strong>
+
+        <span class="panel-arrow">OPEN FILE →</span>
+
+        <div class="panel-doodle">✦</div>
+
       </a>
 
-      <a href="next-arc.html" class="story-panel panel-yellow">
+      <a href="next-arc.html" class="comic-panel yellow-panel">
+
         <span class="panel-number">03</span>
-        <span class="panel-label">ROADMAP</span>
+        <span class="panel-label">MISSION PLAN</span>
+
         <h2>JAPAN 2028</h2>
+
         <p>
-          Indore Hack Club, Physics, Mechatronics and Japan.
+          Indore Hack Club, Physics, Mechatronics and the
+          long route toward studying in Japan.
         </p>
-        <strong>VIEW →</strong>
+
+        <span class="panel-arrow">VIEW ROADMAP →</span>
+
+        <div class="panel-doodle">→</div>
+
       </a>
+
+      <div class="quote-panel">
+
+        <span class="quote-mark">"</span>
+
+        <p>
+          Build things.<br>
+          Break things.<br>
+          Figure out why.
+        </p>
+
+        <span class="quote-credit">CURRENT OPERATING SYSTEM</span>
+
+      </div>
+
+    </section>
+
+    <!-- SMALL INFO STRIP -->
+    <section class="blueprint-strip">
+
+      <div>
+        <span>LOCATION</span>
+        <strong>INDORE, INDIA</strong>
+      </div>
+
+      <div>
+        <span>CURRENT OBJECTIVE</span>
+        <strong>BUILD + LEARN</strong>
+      </div>
+
+      <div>
+        <span>DESTINATION</span>
+        <strong>JAPAN / 2028</strong>
+      </div>
 
     </section>
 
   </main>
 
   <footer class="site-footer">
-    <span>サース / TOKYO 2028 BLUEPRINT</span>
-    <span>BUILT WITH HTML + CSS + JS</span>
+    <span>サース / PERSONAL BLUEPRINT</span>
+    <span>HTML + CSS + JS</span>
+    <span>© 2026 SAARTH GUPTA</span>
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
