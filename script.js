@@ -1,224 +1,306 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  const cursorGlow =
-    document.querySelector(".cursor-glow");
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-  if (cursorGlow) {
+  /* ---------- Intro screen: once per session, click or key to skip ---------- */
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+  function initIntro() {
+    const intro = $(".intro-screen");
+    if (!intro) return;
 
-    let currentX = mouseX;
-    let currentY = mouseY;
+    const hide = () => intro.classList.add("is-hidden");
 
-    document.addEventListener("pointermove", (event) => {
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem("intro-seen") === "1";
+      sessionStorage.setItem("intro-seen", "1");
+    } catch (error) {
+      /* storage can be blocked; just show the intro */
+    }
 
-      mouseX = event.clientX;
-      mouseY = event.clientY;
+    if (seen || reduceMotion) {
+      hide();
+      return;
+    }
 
-      document.body.classList.add("cursor-active");
-
-    });
-
-    const animateCursor = () => {
-
-      currentX +=
-        (mouseX - currentX) * 0.12;
-
-      currentY +=
-        (mouseY - currentY) * 0.12;
-
-      cursorGlow.style.left =
-        `${currentX}px`;
-
-      cursorGlow.style.top =
-        `${currentY}px`;
-
-      requestAnimationFrame(animateCursor);
-    };
-
-    animateCursor();
+    intro.addEventListener("click", hide);
+    document.addEventListener("keydown", hide, { once: true });
+    setTimeout(hide, 2400);
   }
 
+  /* ---------- Navigation: active link + mobile menu ---------- */
 
-  const currentPage =
-    window.location.pathname
-      .split("/")
-      .pop() || "index.html";
+  function normalise(path) {
+    return path.replace(/index\.html$/, "").replace(/\.html$/, "").replace(/\/$/, "") || "/";
+  }
 
-  document
-    .querySelectorAll(".nav-links a")
-    .forEach((link) => {
+  function initNav() {
+    const here = normalise(window.location.pathname);
 
-      const target =
-        link.getAttribute("href");
+    $$(".nav-links a").forEach((link) => {
+      const active = normalise(link.pathname) === here;
+      link.classList.toggle("active", active);
 
-      if (target === currentPage) {
-        link.classList.add("active");
+      if (active) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+
+    const header = $(".site-header");
+    const toggle = $(".nav-toggle");
+    if (!header || !toggle) return;
+
+    const setOpen = (open) => {
+      header.classList.toggle("nav-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(!header.classList.contains("nav-open"));
+    });
+
+    $$(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && header.classList.contains("nav-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.matchMedia("(min-width: 801px)").addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+
+  /* ---------- Pointer effects: cursor glow, hover size, hero parallax ---------- */
+
+  function initPointerEffects() {
+    if (!finePointer || reduceMotion) return;
+
+    let glow = $(".cursor-glow");
+    if (!glow) {
+      glow = document.createElement("div");
+      glow.className = "cursor-glow";
+      glow.setAttribute("aria-hidden", "true");
+      document.body.appendChild(glow);
+    }
+
+    // Uses `translate` (not `transform`) because the hero's entrance animation
+    // keeps control of `transform` after it finishes.
+    const heroArt = $(".hero-illustration");
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let glowX = targetX;
+    let glowY = targetY;
+    let running = false;
+
+    const tick = () => {
+      glowX += (targetX - glowX) * 0.14;
+      glowY += (targetY - glowY) * 0.14;
+
+      glow.style.translate = `${glowX}px ${glowY}px`;
+
+      if (heroArt) {
+        const px = (glowX / window.innerWidth - 0.5) * 12;
+        const py = (glowY / window.innerHeight - 0.5) * 12;
+        heroArt.style.translate = `${px}px ${py}px`;
       }
 
-    });
-
-  document
-    .querySelectorAll(
-      "a, button, .comic-panel, .character-card"
-    )
-    .forEach((element) => {
-
-      element.addEventListener("mouseenter", () => {
-        document.body.classList.add(
-          "cursor-hover"
-        );
-      });
-
-      element.addEventListener("mouseleave", () => {
-        document.body.classList.remove(
-          "cursor-hover"
-        );
-      });
-
-    });
-  document
-    .querySelectorAll("a")
-    .forEach((link) => {
-
-      link.addEventListener(
-        "pointerdown",
-        () => {
-
-          link.style.transform =
-            "translateY(3px) scale(0.96)";
-
-        }
-      );
-
-      link.addEventListener(
-        "pointerup",
-        () => {
-
-          link.style.transform = "";
-
-        }
-      );
-
-      link.addEventListener(
-        "pointerleave",
-        () => {
-
-          link.style.transform = "";
-
-        }
-      );
-
-    });
-  const heroArt =
-    document.querySelector(".hero-illustration");
-
-  if (heroArt &&
-      window.matchMedia("(pointer: fine)").matches) {
+      // stop the loop once the glow has caught up, so an idle page costs nothing
+      if (Math.abs(targetX - glowX) > 0.4 || Math.abs(targetY - glowY) > 0.4) {
+        requestAnimationFrame(tick);
+      } else {
+        running = false;
+      }
+    };
 
     document.addEventListener(
       "pointermove",
       (event) => {
+        targetX = event.clientX;
+        targetY = event.clientY;
 
-        const x =
-          (event.clientX /
-            window.innerWidth -
-            0.5) * 10;
+        document.body.classList.add("cursor-active");
 
-        const y =
-          (event.clientY /
-            window.innerHeight -
-            0.5) * 10;
-
-        heroArt.style.transform =
-          `translate(${x}px, ${y}px)`;
-
-      }
-    );
-
-  }
-
-  const revealItems =
-    document.querySelectorAll(
-      ".comic-panel, .quote-panel, .blueprint-strip"
-    );
-
-  if ("IntersectionObserver" in window) {
-
-    const observer =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add(
-                "revealed"
-              );
-
-              observer.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12
+        if (!running) {
+          running = true;
+          requestAnimationFrame(tick);
         }
-      );
+      },
+      { passive: true }
+    );
 
-    revealItems.forEach((item) => {
+    const interactive = "a, button, .comic-panel, .character-card, .skill-card";
 
-      item.classList.add("reveal-ready");
-
-      observer.observe(item);
-
+    document.addEventListener("pointerover", (event) => {
+      document.body.classList.toggle("cursor-hover", Boolean(event.target.closest(interactive)));
     });
 
+    document.documentElement.addEventListener("mouseleave", () => {
+      document.body.classList.remove("cursor-active", "cursor-hover");
+    });
   }
-  let secret = "";
 
-  const sequence =
-    "manga";
+  /* ---------- Scroll reveal ---------- */
 
-  document.addEventListener(
-    "keydown",
-    (event) => {
+  function initReveal() {
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
 
-      secret +=
-        event.key.toLowerCase();
+    const items = $$(
+      ".comic-panel, .quote-panel, .blueprint-strip, .skill-card, .road-step, " +
+      ".contact-card, .blueprint-note, .contact-note, .construction-box"
+    );
 
-      if (secret.length > sequence.length) {
-        secret =
-          secret.slice(-sequence.length);
-      }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
 
-      if (secret === sequence) {
+          const item = entry.target;
+          item.classList.add("revealed");
+          observer.unobserve(item);
 
-        document.body.classList.add(
-          "manga-mode"
-        );
+          // hand control back to the element's own hover styles once it has landed
+          setTimeout(() => {
+            item.classList.remove("reveal-ready", "revealed");
+            item.style.transitionDelay = "";
+          }, 1100);
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-        setTimeout(() => {
+    const seen = new Map();
 
-          document.body.classList.remove(
-            "manga-mode"
-          );
+    items.forEach((item) => {
+      const index = seen.get(item.parentElement) || 0;
+      seen.set(item.parentElement, index + 1);
 
-        }, 1800);
+      item.style.transitionDelay = `${Math.min(index, 3) * 90}ms`;
+      item.classList.add("reveal-ready");
+      observer.observe(item);
+    });
+  }
 
-        secret = "";
+  /* ---------- Small helpers ---------- */
 
-      }
+  let toastTimer;
 
+  function showToast(message) {
+    let toast = $(".toast");
+
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "toast";
+      toast.setAttribute("role", "status");
+      document.body.appendChild(toast);
     }
-  );
 
-});
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2000);
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+
+    const ok = document.execCommand("copy");
+    field.remove();
+
+    if (!ok) throw new Error("copy failed");
+  }
+
+  function initCopyButtons() {
+    $$("[data-copy]").forEach((button) => {
+      const status = button.parentElement && $(".copy-status", button.parentElement);
+
+      button.addEventListener("click", async () => {
+        let message;
+
+        try {
+          await copyText(button.dataset.copy);
+          message = "COPIED!";
+        } catch (error) {
+          message = "COPY FAILED - SELECT IT MANUALLY";
+        }
+
+        if (status) status.textContent = message;
+        setTimeout(() => {
+          if (status) status.textContent = "";
+        }, 2500);
+      });
+    });
+  }
+
+  function initYear() {
+    $$("[data-year]").forEach((node) => {
+      node.textContent = String(new Date().getFullYear());
+    });
+  }
+
+  /* ---------- Easter egg: type "manga" ---------- */
+
+  function initEasterEgg() {
+    const sequence = "manga";
+    let typed = "";
+
+    document.addEventListener("keydown", (event) => {
+      const tag = event.target.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || event.target.isContentEditable) return;
+      if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) return;
+
+      typed = (typed + event.key.toLowerCase()).slice(-sequence.length);
+
+      if (typed !== sequence) return;
+
+      typed = "";
+      document.body.classList.add("manga-mode");
+      showToast("MANGA MODE ACTIVATED");
+
+      setTimeout(() => document.body.classList.remove("manga-mode"), 1800);
+    });
+  }
+
+  /* ---------- Start ---------- */
+
+  function init() {
+    initIntro();
+    initNav();
+    initPointerEffects();
+    initReveal();
+    initCopyButtons();
+    initYear();
+    initEasterEgg();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
