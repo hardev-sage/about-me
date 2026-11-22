@@ -1,44 +1,44 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navigationLinks = document.querySelectorAll(".navigation-links a");
-  const panels = document.querySelectorAll(".manga-panel");
 
   navigationLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href");
+
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
+
     link.addEventListener("click", () => {
-      document.body.dataset.activeSection =
-        link.getAttribute("href");
+      document.body.classList.add("page-transition");
     });
   });
 
-  panels.forEach((panel) => {
-    panel.addEventListener("pointerenter", () => {
-      panel.dataset.hovered = "true";
-    });
+  const buttons = document.querySelectorAll(".manga-button, .quick-panel");
 
-    panel.addEventListener("pointerleave", () => {
-      delete panel.dataset.hovered;
+  buttons.forEach((button) => {
+    button.addEventListener("pointermove", (event) => {
+      const rect = button.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      button.style.setProperty("--mouse-x", `${x}px`);
+      button.style.setProperty("--mouse-y", `${y}px`);
     });
   });
 
-  const portfolioTarget = document.querySelector("#portfolio");
+  document.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        link.classList.add("keyboard-hit");
 
-  if (portfolioTarget) {
-    const observer = new MutationObserver(() => {
-      if (window.location.hash === "#portfolio") {
-        portfolioTarget.classList.add("is-active");
+        setTimeout(() => {
+          link.classList.remove("keyboard-hit");
+        }, 250);
       }
     });
-
-    observer.observe(portfolioTarget, {
-      attributes: true,
-      attributeFilter: ["class"]
-    });
-  }
-
-  window.addEventListener("hashchange", () => {
-    if (window.location.hash === "#portfolio") {
-      document.body.dataset.activeSection = "#portfolio";
-    }
   });
 });
