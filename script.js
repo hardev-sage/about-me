@@ -1,5 +1,15 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Tokyo 2028 website initialized.");
+  const portfolioLink = document.querySelector(
+    '.navigation-links a[href="#portfolio"]'
+  );
+
+  if (!portfolioLink) {
+    return;
+  }
+
+  portfolioLink.addEventListener("click", () => {
+    console.log("Portfolio section opened.");
+  });
 });
