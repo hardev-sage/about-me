@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Saarth Gupta - personal website, skills, interests and Tokyo 2028 roadmap.">
+  <meta
+    name="description"
+    content="Saarth Gupta - personal website, skills, interests and Tokyo 2028 roadmap."
+  >
   <title>Saarth Gupta | Tokyo 2028</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <div class="page-loader" aria-hidden="true">
+    <span class="loader-line"></span>
+    <span class="loader-text">INITIALIZING BLUEPRINT...</span>
+  </div>
+
   <header class="site-header">
     <nav class="main-navigation" aria-label="Main navigation">
       <a class="site-logo" href="#home">サース / SAARTH</a>
@@ -30,11 +37,15 @@
       <div class="hero-copy">
         <p class="japanese-accent">東京 2028</p>
 
-        <p class="mission-badge">MISSION: JAPAN 2028</p>
+        <p class="mission-badge">
+          MISSION: JAPAN 2028
+        </p>
 
         <h1>Saarth Gupta</h1>
 
-        <p class="age-label">16 / 11TH GRADE</p>
+        <p class="age-label">
+          16 / 11TH GRADE
+        </p>
 
         <p class="hero-tagline">
           Maybe I am RNA. Currently sharing prison in Mar Thoma Higher Secondary
@@ -46,16 +57,26 @@
           Goal: start the Indore Hack Club, build a Physics and Mechatronics
           roadmap, and move toward Japan for higher studies in 2028.
         </p>
+
+        <div class="hero-actions">
+          <a class="primary-link" href="#next-arc">ENTER NEXT ARC</a>
+          <a class="secondary-link" href="#contact">CONTACT</a>
+        </div>
       </div>
 
       <div class="hero-coordinate" aria-hidden="true">
         <span>IND</span>
+        <span>→</span>
         <span>JPN</span>
         <span>2028</span>
       </div>
     </section>
 
-    <div id="portfolio" class="portfolio-target" aria-label="Portfolio status">
+    <div
+      id="portfolio"
+      class="portfolio-target"
+      aria-label="Portfolio status"
+    >
       <div class="portfolio-banner">
         <a
           href="#home"
@@ -67,14 +88,15 @@
 
         <strong>PORTFOLIO STATUS / 01</strong>
 
-        <p>Coming soon you, this man is cooking hard...</p>
+        <p>
+          Coming soon you, this man is cooking hard...
+        </p>
       </div>
     </div>
 
     <section class="panel-grid" aria-label="About Saarth">
       <article class="manga-panel" id="skills">
         <p class="panel-number">01 / SKILLS</p>
-
         <h2>Skills</h2>
 
         <ul>
@@ -88,7 +110,6 @@
 
       <article class="manga-panel" id="hobbies">
         <p class="panel-number">02 / HOBBIES</p>
-
         <h2>Hobbies</h2>
 
         <ul>
@@ -102,12 +123,19 @@
 
       <article class="manga-panel" id="next-arc">
         <p class="panel-number">03 / NEXT ARC</p>
-
         <h2>Next Arc</h2>
 
         <p>
           Start the Indore Hack Club and turn Physics and Mechatronics into a
           practical roadmap toward Japan 2028.
+        </p>
+
+        <div class="arc-progress" aria-label="Japan 2028 roadmap progress">
+          <span></span>
+        </div>
+
+        <p class="progress-label">
+          CURRENT ARC / BUILDING
         </p>
 
         <a class="panel-link" href="#contact">
@@ -117,7 +145,6 @@
 
       <article class="manga-panel" id="contact">
         <p class="panel-number">04 / CONTACT</p>
-
         <h2>Contact</h2>
 
         <address class="contact-list">
@@ -147,6 +174,7 @@
 
   <footer class="site-footer">
     <p>サース / TOKYO 2028 BLUEPRINT</p>
+    <p class="footer-status">SYSTEM STATUS: ONLINE</p>
   </footer>
 
   <script src="script.js"></script>
