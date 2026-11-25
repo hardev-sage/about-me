@@ -29,7 +29,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 
 body {
   display: flex;
@@ -67,6 +67,8 @@ h1 span {
 }
 
 h2 { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+h1, h2 { text-wrap: balance; }
+.manga-card h2 { overflow-wrap: anywhere; }
 ul, ol { list-style: none; }
 a { color: inherit; }
 :lang(ja) { font-family: var(--font-japanese); }
@@ -167,6 +169,7 @@ a { color: inherit; }
 .page-content {
   display: grid;
   flex: 1;
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
   gap: var(--space-5);
   width: min(var(--page-width), 90%);
@@ -469,11 +472,11 @@ a { color: inherit; }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-4);
 }
 
-.card-grid-wide { grid-template-columns: repeat(2, 1fr); }
+.card-grid-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 .card-cycle > :nth-child(5n + 1) { --card-color: var(--color-cyan); }
 .card-cycle > :nth-child(5n + 2) { --card-color: var(--color-pink); }
@@ -538,7 +541,7 @@ a.manga-card:hover,
   text-transform: uppercase;
 }
 
-.skill-toggle { margin-top: auto; }
+.skill-toggle { align-self: stretch; margin-top: auto; text-align: center; }
 
 .card-action {
   margin-top: auto;
@@ -568,7 +571,7 @@ a.manga-card:hover,
 .cone-image {
   align-self: center;
   width: 100%;
-  max-width: 8rem;
+  max-width: 10rem;
   height: auto;
 }
 
@@ -658,7 +661,7 @@ a.manga-card:hover,
 .roadmap-step {
   position: relative;
   display: grid;
-  grid-template-columns: 5rem 1fr;
+  grid-template-columns: 5rem minmax(0, 1fr);
   align-items: start;
   gap: var(--space-3);
 }
@@ -802,7 +805,7 @@ a.manga-card:hover,
 
 @media (max-width: 64rem) {
   .hero { grid-template-columns: minmax(0, 1fr); }
-  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .construction-box { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -811,6 +814,21 @@ a.manga-card:hover,
   .info-strip > div + div { padding: var(--space-2) 0 0; border-top: 2px dashed var(--color-ink); border-left: 0; }
   .info-strip { gap: var(--space-2); }
   .hero-art { min-height: 34rem; }
+}
+
+@media (max-width: 30rem) {
+  .hero-art { padding-inline: var(--space-2); }
+  .character-card {
+    padding: var(--space-2);
+    box-shadow: 10px 10px 0 var(--color-red), -6px -6px 0 var(--color-cyan);
+    transform: rotate(2deg);
+  }
+  .character-face { width: 12rem; height: 10.4rem; }
+  .face-eye { top: 3.4rem; }
+  .face-eye-left { left: 2.2rem; }
+  .face-eye-right { right: 2.2rem; }
+  .vertical-japanese { right: 0.25rem; }
+  .countdown { font-size: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
