@@ -8,15 +8,16 @@ Built with plain **HTML, CSS and JavaScript**. There is no build step and no dep
 
 | File | Page |
 |---|---|
-| `index.html` | Home |
-| `skills.html` | Skills |
-| `hobbies.html` | Hobbies |
-| `next-arc.html` | Roadmap to Japan 2028 |
+| `index.html` | Home with a character card that switches between Build, Debug and Explore modes |
+| `skills.html` | Skills, with a skill cone that stacks up to three skills and emails Saarth about them |
+| `hobbies.html` | Hobbies with a random hobby roller |
+| `next-arc.html` | Roadmap to Japan 2028 with a day countdown |
 | `portfolio.html` | Portfolio (under construction) |
-| `contact.html` | Contact links |
-| `style.css` | Global and home-page styles |
-| `inner-pages.css` | Styles for the inner pages |
-| `script.js` | Navigation, cursor glow, scroll reveal, copy-email button |
+| `contact.html` | Contact links and copy-email button |
+| `style.css` | All styles |
+| `script.js` | Character modes, skill cone, hobby roller, countdown, copy-email button, easter egg |
+| `favicon.svg` | Browser tab icon |
+| `scoop-blueprint.svg` | Portfolio page illustration |
 
 ## Run locally
 
@@ -34,6 +35,7 @@ Push to GitHub, then go to **Settings > Pages**, choose the `main` branch and th
 
 ## Notes
 
-- Works with the keyboard (skip link, visible focus, mobile menu closes with Escape).
+- Works with the keyboard (skip link, visible focus, pressed states on toggles).
 - Respects `prefers-reduced-motion`.
+- Pages work without JavaScript; the interactive tools appear only when it is available.
 - Hidden easter egg: type `manga` on any page.
